@@ -1,0 +1,22 @@
+list files
+    - ls: MAC
+    - DIR
+
+Current Directory
+    - pwd
+
+Change Directory  
+    - cd
+        - "..": Ek directory se bahar nikal jaoge parent directory parent
+        
+Create Directory
+    - mkdir
+
+Create files
+    - touch myfile.cpp
+
+delete files  
+    - rm -rf filename
+
+Open file to edit
+    - vim filename
