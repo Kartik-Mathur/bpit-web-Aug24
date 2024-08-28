@@ -31,8 +31,6 @@ function generateReport(data, cb) {
         Air Quality Index: ${data.aqi}`;
         cb(report);
     }, 2000);
-
-    // After 2 second
 }
 
 getWeatherData((weatherData) => {
