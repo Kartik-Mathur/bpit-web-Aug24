@@ -1,4 +1,4 @@
-function getWeatherData(){
+function getWeatherData(cb) {
     // returns const data = {
     //     city: city,
     //     temperature: 25,
@@ -8,11 +8,11 @@ function getWeatherData(){
     // }; after 2 second
 }
 
-function storeInDB(){
+function storeInDB() {
     // takes 2 seconds to store in db and then goes to generate report
 }
 
-function generateReport(){
+function generateReport() {
     // returns const report = `Weather Report for ${data.city}:
     // Temperature: ${data.temperature}°C
     // Condition: ${data.condition}
