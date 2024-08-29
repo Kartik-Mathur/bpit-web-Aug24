@@ -1,5 +1,4 @@
 let API_key = "68eb9a82e650df54c98feebbf88e20d7";
-let city_name = 'Delhi';
 
 let geocodingUrl = (city_name) =>
     `http://api.openweathermap.org/geo/1.0/direct?q=${city_name}&appid=${API_key}`;
@@ -26,18 +25,17 @@ function getLatAndLon(city_name) {
     })
 }
 
-function getWeatherData(data)
-{
-    return new Promise((resolve,reject)=>{
-        let lat=data.lat;
-        let lon=data.lon;
+function getWeatherData(data) {
+    return new Promise((resolve, reject) => {
+        let lat = data.lat;
+        let lon = data.lon;
 
-        fetch(weatherUrl(lat,lon))
-            .then(data=>data.json())
-            .then(data=>{
+        fetch(weatherUrl(lat, lon))
+            .then(response => response.json())
+            .then(data => {
                 resolve(data)
             })
-            .catch(err=>{
+            .catch(err => {
                 reject(err);
             })
     })
@@ -45,7 +43,7 @@ function getWeatherData(data)
 
 getLatAndLon("Delhi")
     .then(getWeatherData)
-    .then(data=>{
+    .then(data => {
         console.log(data);
     })
     .catch(err => {
