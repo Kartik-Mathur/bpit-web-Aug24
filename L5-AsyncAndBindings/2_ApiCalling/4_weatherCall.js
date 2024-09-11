@@ -49,3 +49,6 @@ getLatAndLon("Delhi")
     .catch(err => {
         console.log(err)
     })
+    .finally(()=>{
+        console.log("All Done")
+    })
