@@ -41,3 +41,23 @@ let totalSalePrice =
     }, 0)
 
 console.log(totalSalePrice.toFixed(2));
+
+
+// Q5. Solution
+let data = sales.reduce((categorisedItems, val) => {
+    if (!categorisedItems[val.category]) {
+        categorisedItems[val.category] = [];
+    }
+    categorisedItems[val.category].push(val);
+
+    return categorisedItems;
+}, {})
+
+// Q6. Solution
+let electronicsItems = data["Electronics"];
+console.log(electronicsItems)
+let electronicsSale = electronicsItems.reduce((acc, item) => {
+    return acc + (item.price) * (item.quantity);
+}, 0);
+
+console.log(electronicsSale.toFixed(2));

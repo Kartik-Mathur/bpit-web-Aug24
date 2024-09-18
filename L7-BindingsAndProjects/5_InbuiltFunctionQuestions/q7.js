@@ -9,15 +9,27 @@ const sales = [
     { id: 8, product: "Watch", category: "Electronics", price: 299.99, quantity: 1, date: "2023-05-08" },
     { id: 9, product: "T-shirt", category: "Clothing", price: 19.99, quantity: 3, date: "2023-05-09" },
     { id: 10, product: "Backpack", category: "Accessories", price: 49.99, quantity: 1, date: "2023-05-10" }
-  ];
+]
 
-Q1. Filter electronics sales.
-Q2. Map sales to product names.
-Q3. Reduce to calculate total revenue.
-Q4. Filter for multiple unit sales, then map to product names.
-Q5. Reduce to group sales by category.
-Q6. Filter electronics, map to sale totals, reduce to sum.
-Q7. Map to product name and price, reduce to find maximum.
-Q8. Filter sports products, reduce to calculate average price.
-Q9. Map to date and daily total, reduce to group by date, then find maximum.
-Q10. Reduce to group and sum quantities by product.
+// Q7. Map to product name and price, reduce to find maximum.
+// To extract product and price, we can use map
+let allProducts = sales.map(item => {
+    return {
+        "product": item.product,
+        "price": item.price
+    }
+})
+
+console.log(allProducts);
+
+// To find the most expensive product, we can now use reduce function on it
+let expensiveProduct = allProducts.reduce((maxValueProduct, product) => {
+    if (maxValueProduct.price > product.price) return maxValueProduct;
+    
+    return product;
+}, {
+    "product": "NA",
+    "price": 0
+});
+
+console.log(expensiveProduct);
