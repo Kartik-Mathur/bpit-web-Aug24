@@ -34,6 +34,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
             completeBtn.addEventListener('click', (ev) => completeTask(indx));
             deleteBtn.addEventListener('click', (ev) => deleteTask(indx));
+            editBtn.addEventListener('click', (ev) => editTask(li, indx));
+        })
+    }
+
+    // Edit Task
+    function editTask(li,indx){
+        let span=li.firstElementChild;
+        // Merko span ki jagah ek input element daalna padega so that user can change the value of
+        // text
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = li.firstElementChild.innerText;
+        li.replaceChild(input,span);
+        input.focus();
+
+        input.addEventListener('blur',(ev)=>{
+            let updatedTaskValue=input.value.trim();
+            console.log(updatedTaskValue);
+            if(updatedTaskValue){
+                tasks[indx].text=updatedTaskValue;
+            }
+            saveTask();
+            renderTask();
         })
     }
 
@@ -74,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTask();
     }
 
-    clearCompletedButton.addEventListener('click',clearCompleted);
+    clearCompletedButton.addEventListener('click', clearCompleted);
 
     // Starting mei renderTask ka call hona jarrori  hai taaki,
     // localStorage ke tasks load  ho jaaye frontEnd par
