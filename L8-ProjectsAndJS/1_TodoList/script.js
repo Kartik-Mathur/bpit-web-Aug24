@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearCompletedButton = document.getElementById('clear-completed');
 
     taskForm.addEventListener('submit', addTask);
-    let tasks = [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     function renderTask() {
         // Clear the entire taskList
         taskList.innerHTML = '';
 
         // Add all the tasks present inside the tasks array to taskList
-        tasks.forEach((task) => {
+        tasks.forEach((task,indx) => {
             const li = document.createElement('li');
             li.innerHTML = `
             <span class="task-text">${task.text}</span>
@@ -27,7 +27,30 @@ document.addEventListener('DOMContentLoaded', () => {
             li.className = `task-item ${task.completed ? 'completed' : ''}`;
 
             taskList.appendChild(li);
+
+            const completeBtn = li.querySelector('.complete-btn');
+            const editBtn = li.querySelector('.edit-btn');
+            const deleteBtn = li.querySelector('.delete-btn');
+
+            completeBtn.addEventListener('click',(ev)=> completeTask(indx));
+            deleteBtn.addEventListener('click',(ev)=>deleteTask(indx));
         })
+    }
+
+    function completeTask(indx){
+        tasks[indx].completed = !tasks[indx].completed;
+        saveTask();
+        renderTask();
+    }
+
+    function deleteTask(indx){
+        tasks.splice(indx,1);
+        saveTask();
+        renderTask();
+    }
+
+    function saveTask() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
     function addTask(e) {
@@ -39,9 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 completed: false
             });
 
+            saveTask();
             renderTask();
         }
     }
 
 
+    // Starting mei renderTask ka call hona jarrori  hai taaki,
+    // localStorage ke tasks load  ho jaaye frontEnd par
+    renderTask();
 })
