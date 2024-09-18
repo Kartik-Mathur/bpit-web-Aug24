@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = '';
 
         // Add all the tasks present inside the tasks array to taskList
-        tasks.forEach((task,indx) => {
+        tasks.forEach((task, indx) => {
             const li = document.createElement('li');
             li.innerHTML = `
             <span class="task-text">${task.text}</span>
@@ -32,19 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const editBtn = li.querySelector('.edit-btn');
             const deleteBtn = li.querySelector('.delete-btn');
 
-            completeBtn.addEventListener('click',(ev)=> completeTask(indx));
-            deleteBtn.addEventListener('click',(ev)=>deleteTask(indx));
+            completeBtn.addEventListener('click', (ev) => completeTask(indx));
+            deleteBtn.addEventListener('click', (ev) => deleteTask(indx));
         })
     }
 
-    function completeTask(indx){
+    function completeTask(indx) {
         tasks[indx].completed = !tasks[indx].completed;
         saveTask();
         renderTask();
     }
 
-    function deleteTask(indx){
-        tasks.splice(indx,1);
+    function deleteTask(indx) {
+        tasks.splice(indx, 1);
         saveTask();
         renderTask();
     }
@@ -67,6 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Clear completed functionality
+    function clearCompleted() {
+        tasks = tasks.filter(task => !task.completed);
+        saveTask();
+        renderTask();
+    }
+
+    clearCompletedButton.addEventListener('click',clearCompleted);
 
     // Starting mei renderTask ka call hona jarrori  hai taaki,
     // localStorage ke tasks load  ho jaaye frontEnd par
