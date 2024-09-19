@@ -86,5 +86,15 @@ function addEntry(e) {
     }
 }
 
+function editEntry(index){
+    const entry = entries[index];
+    entryForm.description.value = entry.description;
+    entryForm.amount.value = entry.amount;
+    entryForm.type.value = entry.type;
+    entryForm.category.value = entry.category;
+
+    entries.splice(index, 1);
+}
+
 renderEntries();
 updateBalance();
