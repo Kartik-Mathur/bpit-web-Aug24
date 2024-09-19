@@ -10,16 +10,28 @@ const filterCategory = document.getElementById('filterCategory');
 
 entryForm.addEventListener('submit', addEntry);
 
-function renderEntries(){
-    `           
-    <td>${entry.description}</td>
-    <td>$${entry.amount.toFixed(2)}</td>
-    <td>${entry.type}</td>
-    <td>${entry.category}</td>
-    <td>
-        <button onclick="editEntry(${index})">Edit</button>
-        <button onclick="deleteEntry(${index})">Delete</button>
-    </td>`
+function renderEntries() {
+    entriesTable.innerHTML = '';
+    const filterTypeValue = filterType.value;
+    const filterCategoryValue = filterCategory.value;
+
+    entries.forEach((entry, index) => {
+        if (
+            (filterCategoryValue === "all" || entry.category === filterCategoryValue) &&
+            (filterTypeValue === 'all' || filterTypeValue === entry.value)) {
+            const row = entriesTable.insertRow();
+            row.innerHTML = `           
+            <td>${entry.description}</td>
+            <td>$${entry.amount}</td>
+            <td>${entry.type}</td>
+            <td>${entry.category}</td>
+            <td>
+                <button onclick="editEntry(${index})">Edit</button>
+                <button onclick="deleteEntry(${index})">Delete</button>
+            </td>`;
+        }
+    })
+    entryForm.reset();
 }
 
 function addEntry(e) {
