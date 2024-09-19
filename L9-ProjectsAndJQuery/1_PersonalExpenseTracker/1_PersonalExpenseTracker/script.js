@@ -1,4 +1,4 @@
-let entries = [];
+let entries = JSON.parse(localStorage.getItem('enteries')) || [];
 
 const entryForm = document.getElementById('entryForm');
 const entriesTable = document.getElementById('entriesTable').getElementsByTagName('tbody')[0];
@@ -9,16 +9,46 @@ const filterType = document.getElementById('filterType');
 const filterCategory = document.getElementById('filterCategory');
 
 entryForm.addEventListener('submit', addEntry);
+filterType.addEventListener('change',renderEntries);
+filterCategory.addEventListener('change',renderEntries);
+
+function saveEnteries() {
+    localStorage.setItem('enteries', JSON.stringify(entries));
+}
+
+function updateBalance() {
+    let totalIncome = 0;
+    let totalExpenses = 0;
+
+    entries.forEach(entry => {
+        if (entry.type === 'income') totalIncome += Number(entry.amount);
+        else totalExpenses += Number(entry.amount);
+    })
+
+    let totalBalance = totalIncome - totalExpenses;
+
+    totalIncomeElement.textContent = `$${totalIncome.toFixed(2)}`;
+    balanceElement.textContent = `$${totalBalance.toFixed(2)}`;
+    totalExpensesElement.textContent = `$${totalExpenses.toFixed(2)}`;
+}
+
+function deleteEntry(index){
+    entries.splice(index, 1);
+    saveEnteries();
+    renderEntries();
+    updateBalance();
+}
 
 function renderEntries() {
     entriesTable.innerHTML = '';
     const filterTypeValue = filterType.value;
     const filterCategoryValue = filterCategory.value;
-
+    console.log(filterTypeValue)
+    console.log(filterCategoryValue)
     entries.forEach((entry, index) => {
         if (
             (filterCategoryValue === "all" || entry.category === filterCategoryValue) &&
-            (filterTypeValue === 'all' || filterTypeValue === entry.value)) {
+            (filterTypeValue === 'all' || filterTypeValue === entry.type)) {
             const row = entriesTable.insertRow();
             row.innerHTML = `           
             <td>${entry.description}</td>
@@ -50,6 +80,11 @@ function addEntry(e) {
             category
         }
         entries.push(entry);
+        saveEnteries();
         renderEntries();
+        updateBalance();
     }
 }
+
+renderEntries();
+updateBalance();
