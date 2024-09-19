@@ -43,8 +43,8 @@ function renderEntries() {
     entriesTable.innerHTML = '';
     const filterTypeValue = filterType.value;
     const filterCategoryValue = filterCategory.value;
-    console.log(filterTypeValue)
-    console.log(filterCategoryValue)
+    // console.log(filterTypeValue)
+    // console.log(filterCategoryValue)
     entries.forEach((entry, index) => {
         if (
             (filterCategoryValue === "all" || entry.category === filterCategoryValue) &&
@@ -71,7 +71,7 @@ function addEntry(e) {
     const type = document.querySelector('#type').value.trim();
     const category = document.querySelector('#category').value.trim();
 
-    console.log(description, amount, type, category);
+    // console.log(description, amount, type, category);
     if (description && amount && type && category) {
         const entry = {
             description,
