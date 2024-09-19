@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskList = document.getElementById('task-list');
     const filterButtons = document.querySelectorAll('.filter-buttons button');
     const clearCompletedButton = document.getElementById('clear-completed');
-    const allTasksSelectBtn = document.getElementById('filter-all');
-    const activeTasksSelectBtn = document.getElementById('filter-active');
-    const completedTasksSelectBtn = document.getElementById('filter-completed');
+    // const allTasksSelectBtn = document.getElementById('filter-all');
+    // const activeTasksSelectBtn = document.getElementById('filter-active');
+    // const completedTasksSelectBtn = document.getElementById('filter-completed');
 
     taskForm.addEventListener('submit', addTask);
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -101,9 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     clearCompletedButton.addEventListener('click', clearCompleted);
-
-
-
 
 
     // Filter tasks functionality
