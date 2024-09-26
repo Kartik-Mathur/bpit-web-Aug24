@@ -1,6 +1,5 @@
 function throttling(cb, delay) {
     let isCalled = false;
-    
     return function () {
         if (!isCalled) {
             isCalled=true;
