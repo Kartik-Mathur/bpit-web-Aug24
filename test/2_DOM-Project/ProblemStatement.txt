@@ -1,0 +1,9 @@
+Task Management Application
+This application will allow users to:
+
+- Add new tasks
+- Mark tasks as complete
+- Edit existing tasks
+- Delete tasks
+- Filter tasks by status (all, active, completed)
+- Clear all completed tasks
