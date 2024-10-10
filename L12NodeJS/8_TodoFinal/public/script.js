@@ -134,3 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // localStorage ke tasks load  ho jaaye frontEnd par
     renderTask();
 })
+
+
+axios.get('/info')
+    .then(res => {
+        const {data}=res;
+        console.log(data);
+    })
+    .catch(err => {
+        console.log(err)
+    })
