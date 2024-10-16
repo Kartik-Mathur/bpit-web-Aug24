@@ -1,10 +1,13 @@
 const path = require('path');
 const express = require('express');
+const exp = require('constants');
 const app = express();
 const PORT = 4444;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.json());// For axios ke data ko read krne ke liye middleware
 
 let todos = ['dance', 'swim', 'sing'];
 
@@ -16,6 +19,7 @@ app.get('/todos', (req, res) => {
 // Will add an element to todos array
 app.post('/todos', (req, res) => {
     const { name } = req.body;
+    console.log(name);
     todos.push(name);
     res.send(todos);
 })
