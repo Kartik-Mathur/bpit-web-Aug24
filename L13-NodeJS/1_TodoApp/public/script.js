@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             axios.post('/addtask', {
                 taskName: data
             }).then((msg) => {
-                alert(msg.data);
+                // alert(msg.data);
                 // If task is addedd successfully, then we need to get all the tasks
                 // from backend so that we can show it to the user
                 axios.get('/gettasks')
@@ -56,8 +56,137 @@ document.addEventListener('DOMContentLoaded', () => {
             li.className = `task-item ${task.completed ? 'completed' : ''}`;
 
             taskList.appendChild(li);
+
+            li.querySelector('.complete-btn').addEventListener('click', (ev) => {
+                let currentLi = ev.target;
+                if (currentLi.innerText === 'Complete') {
+                    // Yeh function '/markcomplete' par request bhej dega with taskName
+                    axios.get(`/markcomplete?task=${task.task}`)
+                        .then(({ msg }) => {
+                            currentLi.innerText = 'Undo';
+                            li.classList.add('completed');
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    axios.get(`/markuncomplete?task=${task.task}`)
+                        .then(({ msg }) => {
+                            currentLi.innerText = 'Complete';
+                            li.classList.remove('completed');
+
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+
+
+
+            li.querySelector('.delete-btn').addEventListener('click', (ev) => {
+                let currentLi = ev.target;
+                axios.get(`/deletetask?task=${task.task}`)
+                    .then((data) => {
+                        currentLi.parentElement.parentElement.remove();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            })
+
+            li.querySelector('.edit-btn').addEventListener('click', (ev) => {
+                let span = li.firstElementChild;
+                // Merko span ki jagah ek input element daalna padega so that user can change the value of
+                // text
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = li.firstElementChild.innerText;
+                li.replaceChild(input, span);
+                input.focus();
+
+                input.addEventListener('blur', (ev) => {
+                    let updatedTaskValue = input.value.trim();
+                    // console.log(updatedTaskValue);
+                    if (updatedTaskValue) {
+                        // tasks[indx].text = updatedTaskValue;
+                        axios.get(`/updatetask?task=${task.task}&newtask=${updatedTaskValue}`)
+                            .then((msg) => {
+                                console.log(msg);
+                                span.innerText = updatedTaskValue;
+                                li.replaceChild(span, input);
+                            })
+                            .catch(err => {
+                                alert(er.message);
+                            })
+                    }
+                })
+
+            })
         });
     }
+
+
+    clearCompletedButton.addEventListener('click', () => {
+        axios.get('/clearcompleted')
+            .then(({ data }) => {
+                taskList.innerHTML = '';
+                updateTaskList(data.data);
+                // console.log(data);
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    })
+
+
+    document.querySelector('.filter-buttons').addEventListener('click', (ev) => {
+        // console.log(ev.target);
+        const id = ev.target.getAttribute('id');
+        const taskStatus = id.split('-').pop();
+
+        filterButtons.forEach((item) => {
+            const currentId = item.getAttribute('id');
+            const currentStatus = currentId.split('-').pop();
+            if (taskStatus === currentStatus) {
+                item.classList.add('active');
+            }
+            else {
+                item.classList.remove('active');
+            }
+        })
+
+        if (taskStatus === 'all') {
+            axios.get('/gettasks')
+                .then(({ data }) => {
+                    updateTaskList(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+        else if (taskStatus === 'active') {
+            axios.get('/getactivetasks')
+                .then(({ data }) => {
+                    updateTaskList(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+        else if (taskStatus === 'completed') {
+            axios.get('/getcompletedtasks')
+                .then(({ data }) => {
+                    updateTaskList(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    })
+
+
 
     function initialLoad() {
         axios.get('/gettasks')
@@ -72,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update taskList with the initial tasks
     initialLoad();
+
 
 
 
