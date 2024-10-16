@@ -21,6 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 taskName: data
             }).then((msg) => {
                 alert(msg.data);
+                // If task is addedd successfully, then we need to get all the tasks
+                // from backend so that we can show it to the user
+                axios.get('/gettasks')
+                    .then(({ data }) => {
+                        console.log(data);
+                        // Agar saare tasks aa gaye we need to add them to taskList
+                        updateTaskList(data);
+                    }).catch(err => {
+                        console.log(err);
+                    })
                 // console.log(msg);
             }).catch(err => {
                 alert(err);
@@ -28,7 +38,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updateTaskList(data) {
+        // Pehle taskList ko empty
+        taskList.innerText = '';
+
+        // data array par iterate karo
+        data.forEach((task, indx) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+            <span class="task-text">${task.task}</span>
+            <div class="task-actions">
+                <button class="complete-btn">${task.completed ? 'Undo' : 'Complete'}</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+            `;
+            li.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+            taskList.appendChild(li);
+        });
+    }
+
+    function initialLoad() {
+        axios.get('/gettasks')
+            .then(({ data }) => {
+                console.log(data);
+                // Agar saare tasks aa gaye we need to add them to taskList
+                updateTaskList(data);
+            }).catch(err => {
+                console.log(err);
+            })
+    }
+
+    // Update taskList with the initial tasks
+    initialLoad();
+
+
+
 })
+
+
+
 /*
 document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');

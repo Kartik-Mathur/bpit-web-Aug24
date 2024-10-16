@@ -36,14 +36,30 @@ app.post('/addtask', (req, res) => {
 
         // Let's write it back to tasks.json
         fs.writeFile(
-            path.join(__dirname, 'tasks.json'), 
+            path.join(__dirname, 'tasks.json'),
             JSON.stringify(fileData)
-        ).then(()=>{
+        ).then(() => {
             res.send("Task added successfully");
         })
-        .catch(err=>{
-            res.send("Unable to add task currently");
-        })
+            .catch(err => {
+                res.send("Unable to add task currently");
+            })
+    })
+})
+
+
+app.get('/gettasks', (req, res) => {
+    // Let's read the tasks.json, kyunki saare tasks ussi ke andar hai
+    fs.readFile(
+        path.join(__dirname, 'tasks.json'), {
+        encoding: 'utf-8'
+    }
+    ).then((fileData) => {
+        // Data ko string yaani json se object mei convert krna hoga
+        fileData = JSON.parse(fileData);
+        res.send(fileData);
+    }).catch(err => {
+        res.send("Unable to fetch all the tasks currently");
     })
 })
 
