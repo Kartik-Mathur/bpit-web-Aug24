@@ -1,0 +1,31 @@
+- Start the server
+mongod --dbpath=data
+
+- Open mongoshell 
+    - mongosh: Type in terminal
+
+- Create a database
+    - use students;
+
+- Create collection
+    - db.createCollection('person');
+
+- Insert document 
+    - db.person.insertOne({ name: 'Deepika' });
+    - db.person.insertMany([{},{}])
+
+- Query
+    - db.person.find();
+    - Operator
+        - $in, $and, $or
+
+- Drop
+    - db.person.drop()
+
+- Operators: 
+    - db.person.find({ 
+        $and: [ 
+            { marks: { $gte: 70 } }, 
+            { marks: { $lte: 80 } }
+        ] 
+      })

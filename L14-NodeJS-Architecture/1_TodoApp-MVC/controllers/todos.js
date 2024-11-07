@@ -34,9 +34,9 @@ module.exports.postAddTask = (req, res) => {
         ).then(() => {
             res.send("Task added successfully");
         })
-            .catch(err => {
-                res.send("Unable to add task currently");
-            })
+        .catch(err => {
+            res.send("Unable to add task currently");
+        })
     })
 }
 
