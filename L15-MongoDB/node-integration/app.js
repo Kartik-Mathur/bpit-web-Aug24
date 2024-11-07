@@ -29,23 +29,67 @@ async function main() {
     return 'done.';
 }
 
-app.post('/add',async (req,res)=>{
-    const {name, college, marks} = req.body;
+app.post('/add', async (req, res) => {
+    const { name, college, marks } = req.body;
     let data = await person.insertOne({
-        name, 
-        college, 
+        name,
+        college,
         marks
     })
     console.log(data);
     res.send({
-        "msg":'Person added',
+        "msg": 'Person added',
         data
     })
 })
 
-// app.get('/read',(req,res)=>{
+app.get('/read', async (req, res) => {
+    let data = await person.find({}).toArray();
+    console.log(data);
+    res.send({
+        msg: 'Retrieved Successfully',
+        data
+    })
+})
 
-// })
+app.get('/read-range', async (req, res) => {
+    const { min, max } = req.query;
+    console.log(min, max);
+    let data = await person.find({
+        $and: [
+            { marks: { $gte: +min } },
+            { marks: { $lte: +max } }
+        ]
+    }).toArray();
+
+    console.log(data);
+    res.send({
+        msg: 'Retrieved Successfully',
+        data
+    })
+})
+
+app.get('/update', async (req, res) => {
+    const { name, college, marks, oldName } = req.query;
+
+    await person.updateOne(
+        {
+            name: oldName
+        },
+        {
+            $set:{
+                name,
+                college,
+                marks
+            }
+        }
+    );
+
+    res.send({
+        msg:'Update done'
+    })
+
+})
 
 
 main()
