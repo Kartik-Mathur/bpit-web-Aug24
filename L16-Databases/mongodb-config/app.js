@@ -14,7 +14,7 @@ import studentRouter from './router/studentRouter.js';
 app.use('/', studentRouter);
 
 main()
-    .then((msg) => {
+    .then(() => {
         console.log("Database connected");
         app.listen(PORT, () => {
             console.log(`http://localhost:` + PORT);
