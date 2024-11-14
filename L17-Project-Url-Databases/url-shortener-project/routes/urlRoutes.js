@@ -15,6 +15,16 @@ router.post('/shorten', async (req, res) => {
     }
 });
 
+router.get('/getallurls', async (req, res) => {
+    try {
+        const urls = await Url.find({});
+        if (urls) return res.status(200).json({urls});
+        res.status(500).json({ message: "URLs List not found" });
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+})
+
 router.get('/:shortUrl', async (req, res) => {
     const { shortUrl } = req.params;
     try {
@@ -26,8 +36,7 @@ router.get('/:shortUrl', async (req, res) => {
     }
 });
 
-router.get('/allUrl',async(req,res)=>{
-    
-})
+
+
 
 module.exports = router;
