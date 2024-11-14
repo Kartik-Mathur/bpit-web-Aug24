@@ -5,14 +5,14 @@ This project is a simple URL shortener built using NodeJS, MongoDB, and Mongoose
 ## Prerequisites
 
     - Node.js and npm installed
-        - MongoDB account or local MongoDB instance
-            - Basic knowledge of JavaScript, Node.js, and MongoDB
+    - MongoDB account or local MongoDB instance
+    - Basic knowledge of JavaScript, Node.js, and MongoDB
 
 ## Project Setup
 
 ### 1. Initialize the Project
 
-    ```bash
+```bash
 mkdir url-shortener
 cd url-shortener
 npm init -y
@@ -28,7 +28,7 @@ npm install express mongoose dotenv nanoid
 
 ### 3. Set Up Folder Structure
 
-    ```bash
+```bash
 mkdir models routes views public
 touch server.js .env
 ```
@@ -43,7 +43,7 @@ Sign up at[MongoDB Atlas](https://www.mongodb.com/) if you don’t already have 
 
 In your `.env` file, add your MongoDB URI:
 
-            ```plaintext
+```plaintext
 MONGODB_URI=your-mongodb-uri-here
 PORT=3000
 ```
