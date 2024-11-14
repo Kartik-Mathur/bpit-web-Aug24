@@ -75,10 +75,8 @@ Define a schema to manage URLs.
 
 1. In `models`, create `Url.js`:
 
-   ```javascript
-   const mongoose = require("mongoose");
-   ```
-
+```javascript
+const mongoose = require("mongoose");
         async function generateShortId() {
             const { nanoid } = await import('nanoid');
             return nanoid(7);
@@ -100,7 +98,8 @@ urlSchema.pre('save', function (next) {
     else next();
 });
 
-module.exports = mongoose.model('Url', urlSchema); ```
+module.exports = mongoose.model('Url', urlSchema); 
+```
 
 ## Backend Routes
 
