@@ -151,7 +151,7 @@ app.use("/api", urlRoutes);
 
 1. Create `index.html` in `views`:
 
-   ```html
+```html
     < !DOCTYPE html >
         <html lang="en">
             <head>
@@ -176,7 +176,6 @@ app.use("/api", urlRoutes);
 ```
 
 2. Create `script.js` in `public`:
-
 ```javascript
 document.getElementById('urlForm').addEventListener('submit', async (event) => {
     event.preventDefault();

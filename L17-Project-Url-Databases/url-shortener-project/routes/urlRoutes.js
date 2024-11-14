@@ -26,4 +26,8 @@ router.get('/:shortUrl', async (req, res) => {
     }
 });
 
+router.get('/allUrl',async(req,res)=>{
+    
+})
+
 module.exports = router;
