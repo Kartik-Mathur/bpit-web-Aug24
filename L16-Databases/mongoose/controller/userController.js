@@ -30,7 +30,7 @@ const postAdd = async (req, res) => {
 
 const postUpdate = async (req, res) => {
     const { name, username, marks } = req.body;
-    
+
     if (!username) {
         return res.status(400).json({
             msg: "You didnot provide username to update"
@@ -41,7 +41,7 @@ const postUpdate = async (req, res) => {
         let user = await User.findOne({
             username
         })
-        
+
         if (!user) {
             return res.status(400).json({
                 msg: "Incorrect username, Try again!"
@@ -70,4 +70,58 @@ const postUpdate = async (req, res) => {
 }
 
 
-export { postAdd,postUpdate };
+const getDelete = async (req, res) => {
+    const { username } = req.query;
+
+    if (!username) {
+        return res.status(400).json({
+            msg: "You didnot provide username to delete"
+        })
+    }
+
+    try {
+        let user = await User.findOne({
+            username
+        })
+
+        if (!user) {
+            return res.status(400).json({
+                msg: "Unable to delete incorrect username, Try again!"
+            })
+        }
+
+        await User.deleteOne({
+            username
+        })
+
+        res.status(200).json({
+            msg: "User deleted successfully",
+            user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            msg: "Internal server error, Unable to delete user",
+            error
+        })
+    }
+}
+
+const getAllUser = async (req, res) => {
+    try {
+        let users = await User.find();
+
+        res.status(200).json({
+            msg: "User fetched successfully",
+            users
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            msg: "Internal server error, Unable to find users data",
+            error
+        })
+    }
+}
+
+export { postAdd, postUpdate, getDelete, getAllUser };
