@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Application Assignment</title>
+</head>
+<body>
+    <!-- Assignment: Create a Todo Application with JS -->
+
+    <!-- Task: Add Inputs for Task Title and Description -->
+    <h1>Todo Application</h1>
+    <input type="text" id="title" placeholder="Enter task title" />
+    <input type="text" id="description" placeholder="Enter task description" />
+    <button onclick="addTodo()">Add Task</button> <!-- Button to Add Tasks -->
+
+    <!-- Task: Display the List of Todos -->
+    <ul id="todoList"></ul>
+
+    <script>
+        // 1. Create a global array to manage the state of the Todo list
+        let identifier = 1; // Unique identifier for each task
+        let todoState = []; // Array to store all tasks
+
+        // 2. Implement the addTodo
+        function addTodo() {
+            const title = document.getElementById('title').value; // Get task title from input
+            const description = document.getElementById('description').value; // Get task description from input
+
+            // Ensure both inputs are provided
+            if (!title || !description) {
+                // Give an alert message
+                return;
+            }
+
+            // Create a new task object with a unique ID
+            const newTodo = {
+                
+            };
+
+            // Add the new task to the todoState array
+
+            // Call updateState to re-render the task list
+            
+        }
+
+        // 3. Implement the removeTodo function
+        function removeTodo(todoId) {
+            // Find the task element in the DOM and remove it
+            
+
+            // Update the state by filtering out the removed task
+            
+        }
+
+        // 4. Implement the updateTodo 
+        function updateTodo(todoId, newTitle, newDescription) {
+            // Find the element and update it
+            const element = document.getElementById();
+            const titleElement = element.querySelector();
+            const descriptionElement = element.querySelector();
+
+            titleElement.innerText = newTitle;
+            descriptionElement.innerText = newDescription;
+
+            // Update the state array with the updated task
+
+        }
+
+        // 5. Implement the updateState function
+        function updateState(newState) {
+            // Get the container element
+            
+            // Clear the current list
+
+            // Loop through the updated state and create list items
+            newState.forEach(todo => {
+                const listItem = document.createElement('li');
+                listItem.setAttribute('id', `todo-${todo.id}`);
+
+                // Create title and description elements
+                
+                // Add a button to remove the task(hint: onClick function needed)
+               
+                // Add a button to edit the task(updateToDo will do the job)
+
+                // Append all elements to the list item
+              
+
+                // Add the list item to the container element
+                
+            });
+        }
+    </script>
+</body>
+</html>
