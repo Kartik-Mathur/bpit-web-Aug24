@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla JS Counter</title>
+</head>
+<body>
+    <!-- Parent element for dynamically created components -->
+    <div id="counterParent">
+        
+    </div>
+
+    <script>
+        // Initialize state
+        let state = {
+            count: 0
+        };
+
+        // Function to update state
+        function incrementState() {
+            state.count++;
+            reRenderCounterComponent();
+        }
+
+        // Function to re-render the counter component
+        function reRenderCounterComponent() {
+            // Clear the parent container
+            document.getElementById("counterParent").innerHTML = "";
+
+            // Create the updated component
+            const counterComponent = createCounterComponent(state.count);
+
+            // Append the updated component to the parent
+            document.getElementById("counterParent").appendChild(counterComponent);
+        }
+
+        // Function to create the counter button component
+        function createCounterComponent(count) {
+            const button = document.createElement("button");
+            button.innerHTML = `Counter: ${count}`;
+            button.setAttribute("onclick", "incrementState()");
+            return button;
+        }
+
+        // Initial rendering of the component
+        reRenderCounterComponent();
+    </script>
+</body>
+</html>

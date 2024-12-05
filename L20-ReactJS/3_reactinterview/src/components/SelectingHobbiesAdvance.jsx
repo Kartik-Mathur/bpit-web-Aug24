@@ -21,23 +21,12 @@ const SelectingHobbies = () => {
     <div>
       {/* Check box to take input of hobbies that user have */}
       Select your hobbies
-      <div>
-        {hobbies.map((h, indx) => (
-          <div
-            key={indx}
-            style={{
-              margin: "10px",
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={selectedHobbies.includes(h)}
-              onChange={() => toggleHobby(h)}
-            />
-            {h}
-          </div>
-        ))}
-      </div>
+      <ShowHobbies
+        hobbies={hobbies}
+        selectedHobbies={selectedHobbies}
+        toggleHobby={toggleHobby}
+      ></ShowHobbies>
+      
       {/* Showcase all the hobbies that a user has selected */}
       <div>You have selected: {selectedHobbies.join(" , ") || "NA"} </div>
     </div>
@@ -45,7 +34,7 @@ const SelectingHobbies = () => {
 };
 
 function ShowHobbies(props) {
-  const { hobbies } = props;
+  const { hobbies, selectedHobbies, toggleHobby } = props;
   return (
     <div>
       {hobbies.map((h, indx) => (
@@ -55,7 +44,11 @@ function ShowHobbies(props) {
             margin: "10px",
           }}
         >
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={selectedHobbies.includes(h)}
+            onChange={() => toggleHobby(h)}
+          />
           {h}
         </div>
       ))}
