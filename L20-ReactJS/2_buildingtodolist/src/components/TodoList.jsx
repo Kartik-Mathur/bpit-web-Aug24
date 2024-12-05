@@ -14,11 +14,12 @@ const TodoList = () => {
     },
   ]);
 
+
   return (
     <ul>
       {tasks.map((t) => {
         return (
-          <li className={t.id}>
+          <li key={t.id} className={t.id}>
             <div>{t.title}</div>
             <div>{t.description}</div>
           </li>
