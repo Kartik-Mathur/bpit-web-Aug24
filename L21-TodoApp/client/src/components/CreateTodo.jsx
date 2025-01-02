@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-const CreateTodo = () => {
+const CreateTodo = ({ updateTodo }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  /*
   function addTodo() {
     fetch("http://localhost:4444/todo", {
       method: "POST",
@@ -12,13 +13,18 @@ const CreateTodo = () => {
         description,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
+
       });
+  }*/
+
+  function addTodo() {
+    updateTodo(name, description);
   }
 
   return (

@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.content{
+  display: flex;
+  margin-top: 80px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.content div{
+  height:calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.main-content{
+  width: 70%;
+  border: 1px solid red;
+}

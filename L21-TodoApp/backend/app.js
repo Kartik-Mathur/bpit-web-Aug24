@@ -10,7 +10,7 @@ const PORT = 4444;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5174'
 }));
 
 // {name, description, completed}
@@ -24,8 +24,10 @@ app.post('/todo', async (req, res) => {
 
     try {
         await Todo.create({ name, description });
+        let todos = await Todo.find({});
         res.status(200).json({
-            msg: "Todo insert success"
+            msg: "Todo insert success",
+            todos
         })
     } catch (error) {
         res.status(500).json({

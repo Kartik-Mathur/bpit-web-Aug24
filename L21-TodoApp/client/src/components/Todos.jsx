@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // let todos = [
 //     {name: 'Cricket',description: 'Hello World', completed: false},
@@ -7,19 +7,11 @@ import React, { useState } from "react";
 //     {name: 'Dancing',description: 'Hello-World', completed: false},
 // ]
 
-const Todos = () => {
-  const [todos, setTodos] = useState([]);
-  // useEffect()
-  fetch("http://localhost:4444/todos")
-    .then((res) => res.json())
-    .then((data) => {
-      //   console.log(data);
-      // setTodos(data);
-    });
-
+const Todos = ({todos}) => {
+  
   return (
     <div>
-      {todos.map((t) => {
+      {todos.map((t, indx) => {
         return (
           <div
             style={{
@@ -27,6 +19,7 @@ const Todos = () => {
               padding: "10px",
               justifyContent: "space-around",
             }}
+            key={indx}
           >
             <h4>{t.name}</h4>
             <h6>{t.description}</h6>
